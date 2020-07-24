@@ -22,13 +22,40 @@ obniz.onconnect = async function () {
   var motorA = obniz.wired("DCMotor",  {forward:3, back:2});
   motorA.power(50);
   var motorB = obniz.wired("DCMotor",  {forward:1, back:0});
-  motorA.power(60);
+  motorA.power(80);
 
   $("#buttonA").on('touchstart mousedown', function(){
     motorA.move(true);
     motorB.move(true);  //ボタンが押されたら動かす
   })
   $("#buttonA").on('touchend mouseup', function(){
+    motorA.stop();
+    motorB.stop(); //ボタンが離されたら止める
+  })
+
+   $("#buttonB").on('touchstart mousedown', function(){
+    motorA.move(false);
+    motorB.move(false);  //ボタンが押されたら動かす
+  })
+  $("#buttonB").on('touchend mouseup', function(){
+    motorA.stop();
+    motorB.stop(); //ボタンが離されたら止める
+  })
+
+  $("#buttonC").on('touchstart mousedown', function(){
+    motorA.move(true);
+    motorB.stop();  //ボタンが押されたら動かす
+  })
+  $("#buttonC").on('touchend mouseup', function(){
+    motorA.stop();
+    motorB.stop(); //ボタンが離されたら止める
+  })
+
+  $("#buttonD").on('touchstart mousedown', function(){
+    motorA.stop();
+    motorB.move(true);  //ボタンが押されたら動かす
+  })
+  $("#buttonD").on('touchend mouseup', function(){
     motorA.stop();
     motorB.stop(); //ボタンが離されたら止める
   })
