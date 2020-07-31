@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://obniz.io/js/jquery-3.2.1.min.js"></script>
+  <script src="https://unpkg.com/obniz@latest/obniz.js"></script>
+</head>
+<body>
+
+<div id="obniz-debug"></div>
+<h1>LED Switch</h1>
+<button id="onA">青</button>
+<button id="onB">赤</button>
+<button id="offA">青オフ</button>
+<button id="offB">赤オフ</button>
+
+<script>
+  var obniz = new Obniz("9967-8204");
+  obniz.onconnect = async function () {
+    var led1 = obniz.wired("青", {anode:0, cathode:1});
+    var led2 = obniz.wired("赤", {anode:2, cathode:3});
+    $("#onA").on("click",function(){
+      led1.on();
+    });
+    $("#onB").on("click",function(){
+      led2.on();
+    });
+    $("#offA").on("click",function(){
+      led1.off();
+    });
+    $("#offB").on("click",function(){
+      led2.off();
+    });
+  };
+
+  obniz.onclose = async function(){
+    $("#onA").off("click");
+    $("#offA").off("click"); 
+    $("#onB").off("click");
+    $("#offB").off("click");
+  };
+</script>​
+</body>
+</html>
